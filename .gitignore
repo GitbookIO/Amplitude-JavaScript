@@ -6,7 +6,6 @@ dist
 .DS_Store
 *.crt
 *.key
-amplitude.js
 amplitude.esm.js
 amplitude.min.js
 amplitude.nocompat.js
