@@ -3332,9 +3332,8 @@
     try {
       this.options.apiKey = apiKey;
       this._storageSuffix = '_' + apiKey + this._legacyStorageSuffix;
-      var hasExistingCookie = !!this.cookieStorage.get(this.options.cookieName + this._storageSuffix);
 
-      if (opt_config && opt_config.deferInitialization && !hasExistingCookie) {
+      if (opt_config && opt_config.deferInitialization && !this.hasExistingCookie()) {
         this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
 
         return;
@@ -3486,6 +3485,10 @@
       utils.log.error(err);
       this.options.onError(err);
     }
+  };
+
+  AmplitudeClient.prototype.hasExistingCookie = function hasExistingCookie() {
+    return !!this.cookieStorage.get(this.options.cookieName + this._storageSuffix);
   };
   /**
    * @private
