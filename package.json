@@ -11,6 +11,7 @@
   "repository": "git://github.com/amplitude/amplitude-javascript.git",
   "main": "amplitude.js",
   "react-native": "amplitude.native.js",
+  "types": "./types/amplitude.d.ts",
   "dependencies": {
     "@amplitude/ua-parser-js": "0.7.20",
     "blueimp-md5": "^2.10.0",
