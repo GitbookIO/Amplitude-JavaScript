@@ -97,6 +97,7 @@ export class AmplitudeClient {
     generateDeviceId(): string;
 
     identify(identify_obj: Identify, opt_callback?: Callback): void;
+    groupIdentify(groups: string, group_id: string, identify: Identify): void;
 
     setUserProperties(properties: any): void;
     setGlobalUserProperties(properties: any): void;
