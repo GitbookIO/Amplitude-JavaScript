@@ -16,6 +16,7 @@ interface Config {
     cookieExpiration?: number;
     cookieName?: string;
     userId?: string;
+    deferInitialization?: boolean;
     deviceId?: string;
     deviceIdFromUrlParam?: boolean;
     domain?: string;
