@@ -1104,8 +1104,8 @@ AmplitudeClient.prototype.groupIdentify = function(group_type, group_name, ident
  * @param {string} versionName - The version to set for your application.
  * @example amplitudeClient.setVersionName('1.12.3');
  */
-AmplitudeClient.prototype.setVersionName = function setVersionName(versionName) {
-  if (this._shouldDeferCall()) {
+AmplitudeClient.prototype.setVersionName = function setVersionName(versionName, doNotDefer) {
+  if (!doNotDefer && this._shouldDeferCall()) {
     return this._q.push(['setVersionName'].concat(Array.prototype.slice.call(arguments, 0)));
   }
 
