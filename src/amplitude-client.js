@@ -79,7 +79,7 @@ AmplitudeClient.prototype.init = function init(apiKey, opt_userId, opt_config, o
     this.options.apiKey = apiKey;
     this._storageSuffix = '_' + apiKey + this._legacyStorageSuffix;
 
-    if (opt_config && opt_config.deferInitialization && !this.hasExistingCookie()) {
+    if (opt_config && ((opt_config.deferInitialization && !this.hasExistingCookie()) || opt_config.lazyInitialization)) {
       this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
       return;
     }
@@ -915,11 +915,10 @@ AmplitudeClient.prototype.generateDeviceId = function generateDeviceId() {
   * (we recommend something like a UUID - see src/uuid.js for an example of how to generate) to prevent conflicts with other devices in our system.
   * @public
   * @param {string} deviceId - custom deviceId for current user.
-  * @param {boolean} doNotDefer - set to true if you wish the deviceId to be set regardless of whether tracking is paused.
   * @example amplitudeClient.setDeviceId('45f0954f-eb79-4463-ac8a-233a6f45a8f0');
   */
-AmplitudeClient.prototype.setDeviceId = function setDeviceId(deviceId, doNotDefer) {
-  if (!doNotDefer && this._shouldDeferCall()) {
+AmplitudeClient.prototype.setDeviceId = function setDeviceId(deviceId) {
+  if (this._shouldDeferCall()) {
     return this._q.push(['setDeviceId'].concat(Array.prototype.slice.call(arguments, 0)));
   }
 
@@ -1104,8 +1103,8 @@ AmplitudeClient.prototype.groupIdentify = function(group_type, group_name, ident
  * @param {string} versionName - The version to set for your application.
  * @example amplitudeClient.setVersionName('1.12.3');
  */
-AmplitudeClient.prototype.setVersionName = function setVersionName(versionName, doNotDefer) {
-  if (!doNotDefer && this._shouldDeferCall()) {
+AmplitudeClient.prototype.setVersionName = function setVersionName(versionName) {
+  if (this._shouldDeferCall()) {
     return this._q.push(['setVersionName'].concat(Array.prototype.slice.call(arguments, 0)));
   }
 

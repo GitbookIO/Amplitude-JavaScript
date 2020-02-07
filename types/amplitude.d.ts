@@ -27,6 +27,7 @@ interface Config {
     includeReferrer?: boolean;
     includeUtm?: boolean;
     language?: string;
+    lazyInitialization?: boolean;
     logLevel?: 'DISABLE' | 'ERROR' | 'WARN' | 'INFO';
     optOut?: boolean;
     platform?: string;
@@ -51,6 +52,7 @@ interface Config {
     unsentKey?: string;
     unsentIdentifyKey?: string;
     uploadBatchSize?: number;
+    versionName?: string;
 }
 
 export class Identify {
@@ -92,7 +94,7 @@ export class AmplitudeClient {
     setDomain(domain: string): void;
     setUserId(userId: string | null): void;
 
-    setDeviceId(id: string, doNotTrack?: boolean): void;
+    setDeviceId(id: string): void;
     regenerateDeviceId(): void;
     generateDeviceId(): string;
 
