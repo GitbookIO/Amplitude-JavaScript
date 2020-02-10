@@ -79,7 +79,10 @@ AmplitudeClient.prototype.init = function init(apiKey, opt_userId, opt_config, o
     this.options.apiKey = apiKey;
     this._storageSuffix = '_' + apiKey + this._legacyStorageSuffix;
 
-    if (opt_config && ((opt_config.deferInitialization && !this.hasExistingCookie()) || opt_config.lazyInitialization)) {
+    var waitingForCookieApproval = opt_config && opt_config.deferInitialization && !this.hasExistingCookie();
+    var lazyInitialization = opt_config && opt_config.lazyInitialization && !this._forceInitialization;
+
+    if (waitingForCookieApproval || lazyInitialization) {
       this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
       return;
     }
@@ -1637,6 +1640,7 @@ AmplitudeClient.prototype._deferInitialization = function _deferInitialization()
 AmplitudeClient.prototype.enableTracking = function enableTracking() {
   // This will call init (which drops the cookie) and will run any pending tasks
   this._initializationDeferred = false;
+  this._forceInitialization = true;
   _saveCookieData(this);
   this.runQueuedFunctions();
 };
