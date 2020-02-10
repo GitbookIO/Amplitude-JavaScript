@@ -3213,7 +3213,7 @@
     );
   };
 
-  var version = "5.8.0";
+  var version = "5.8.0-gitbook1.5.0";
 
   var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -3333,7 +3333,7 @@
       this.options.apiKey = apiKey;
       this._storageSuffix = '_' + apiKey + this._legacyStorageSuffix;
 
-      if (opt_config && opt_config.deferInitialization && !this.hasExistingCookie()) {
+      if (opt_config && (opt_config.deferInitialization && !this.hasExistingCookie() || opt_config.lazyInitialization)) {
         this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
 
         return;
@@ -4244,13 +4244,12 @@
     * (we recommend something like a UUID - see src/uuid.js for an example of how to generate) to prevent conflicts with other devices in our system.
     * @public
     * @param {string} deviceId - custom deviceId for current user.
-    * @param {boolean} doNotDefer - set to true if you wish the deviceId to be set regardless of whether tracking is paused.
     * @example amplitudeClient.setDeviceId('45f0954f-eb79-4463-ac8a-233a6f45a8f0');
     */
 
 
-  AmplitudeClient.prototype.setDeviceId = function setDeviceId(deviceId, doNotDefer) {
-    if (!doNotDefer && this._shouldDeferCall()) {
+  AmplitudeClient.prototype.setDeviceId = function setDeviceId(deviceId) {
+    if (this._shouldDeferCall()) {
       return this._q.push(['setDeviceId'].concat(Array.prototype.slice.call(arguments, 0)));
     }
 
