@@ -3213,7 +3213,7 @@
     );
   };
 
-  var version = "5.8.0-gitbook1.6.0";
+  var version = "5.8.0-gitbook1.7.0";
 
   var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -3336,6 +3336,8 @@
       var lazyInitialization = opt_config && opt_config.lazyInitialization && !this._forceInitialization;
 
       if (waitingForCookieApproval || lazyInitialization) {
+        this._deferredInitializationConfig = opt_config;
+
         this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
 
         return;
@@ -5064,7 +5066,9 @@
     this._initializationDeferred = false;
     this._forceInitialization = true;
 
-    _saveCookieData(this);
+    if (this._deferredInitializationConfig && this._deferredInitializationConfig.deferInitialization) {
+      _saveCookieData(this);
+    }
 
     this.runQueuedFunctions();
   };
