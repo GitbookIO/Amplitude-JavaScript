@@ -3213,7 +3213,7 @@
     );
   };
 
-  var version = "5.8.0-gitbook1.5.0";
+  var version = "5.8.0-gitbook1.6.0";
 
   var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -3332,8 +3332,10 @@
     try {
       this.options.apiKey = apiKey;
       this._storageSuffix = '_' + apiKey + this._legacyStorageSuffix;
+      var waitingForCookieApproval = opt_config && opt_config.deferInitialization && !this.hasExistingCookie();
+      var lazyInitialization = opt_config && opt_config.lazyInitialization && !this._forceInitialization;
 
-      if (opt_config && (opt_config.deferInitialization && !this.hasExistingCookie() || opt_config.lazyInitialization)) {
+      if (waitingForCookieApproval || lazyInitialization) {
         this._deferInitialization(apiKey, opt_userId, opt_config, opt_callback);
 
         return;
@@ -5060,6 +5062,7 @@
   AmplitudeClient.prototype.enableTracking = function enableTracking() {
     // This will call init (which drops the cookie) and will run any pending tasks
     this._initializationDeferred = false;
+    this._forceInitialization = true;
 
     _saveCookieData(this);
 
