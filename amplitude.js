@@ -3213,7 +3213,7 @@
     );
   };
 
-  var version = "5.8.0-gitbook1.7.0";
+  var version = "5.8.0-gitbook1.8.0";
 
   var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -3360,6 +3360,10 @@
         secure: this.options.secureCookie
       });
       this.options.domain = this.cookieStorage.options().domain;
+
+      if (this._forceInitialization) {
+        _saveCookieData(this);
+      }
 
       {
         if (this._instanceName === Constants.DEFAULT_INSTANCE) {

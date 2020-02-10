@@ -104,6 +104,10 @@ AmplitudeClient.prototype.init = function init(apiKey, opt_userId, opt_config, o
     });
     this.options.domain = this.cookieStorage.options().domain;
 
+    if (this._forceInitialization) {
+      _saveCookieData(this);
+    }
+
     if (!BUILD_COMPAT_REACT_NATIVE) {
       if (this._instanceName === Constants.DEFAULT_INSTANCE) {
         _upgradeCookieData(this);
