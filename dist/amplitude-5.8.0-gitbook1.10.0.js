@@ -3213,7 +3213,7 @@
     );
   };
 
-  var version = "5.8.0-gitbook1.9.0";
+  var version = "5.8.0-gitbook1.10.0";
 
   var getLanguage = function getLanguage() {
     return navigator && (navigator.languages && navigator.languages[0] || navigator.language || navigator.userLanguage) || undefined;
@@ -5282,6 +5282,15 @@
 
     Amplitude.prototype.regenerateDeviceId = function regenerateDeviceId() {
       this.getInstance().regenerateDeviceId();
+    };
+    /**
+     * Generates a deviceId.
+     * @public
+     */
+
+
+    Amplitude.prototype.generateDeviceId = function generateDeviceId() {
+      return this.getInstance().generateDeviceId();
     };
     /**
       * Sets a custom deviceId for current user. Note: this is not recommended unless you know what you are doing

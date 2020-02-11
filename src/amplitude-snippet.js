@@ -2,10 +2,10 @@
   var amplitude = window.amplitude || {'_q':[],'_iq':{}};
   var as = document.createElement('script');
   as.type = 'text/javascript';
-  as.integrity = 'sha384-qyYP2zIwyo+WR2y5xtbG8qI2KE84j7nXWq1KuV9zRftlFchfcX4qZhIcH4pYhUab';
+  as.integrity = 'sha384-t1VY+5ZBx5URMpeIKwXrjdd6sY0t5NYW2BVr78HRWTgNMFd4gq9mUZx3vZMQey3l';
   as.crossOrigin = 'anonymous';
   as.async = true;
-  as.src = 'https://cdn.amplitude.com/libs/amplitude-5.8.0-gitbook1.9.0-min.gz.js';
+  as.src = 'https://cdn.amplitude.com/libs/amplitude-5.8.0-gitbook1.10.0-min.gz.js';
   as.onload = function() {if(!window.amplitude.runQueuedFunctions) {console.log('[Amplitude] Error: could not load SDK');}};
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(as, s);
@@ -25,7 +25,7 @@
   var funcs = ['init', 'logEvent', 'logRevenue', 'setUserId', 'setUserProperties',
                'setOptOut', 'setVersionName', 'setDomain', 'setDeviceId', 'enableTracking',
                'setGlobalUserProperties', 'identify', 'clearUserProperties',
-               'setGroup', 'logRevenueV2', 'regenerateDeviceId', 'groupIdentify', 'onInit',
+               'setGroup', 'logRevenueV2', 'regenerateDeviceId', 'generateDeviceId', 'groupIdentify', 'onInit',
                'logEventWithTimestamp', 'logEventWithGroups', 'setSessionId', 'resetSessionId'];
   function setUpProxy(instance) {
     function proxyMain(fn) {

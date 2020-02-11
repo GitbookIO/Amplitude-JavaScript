@@ -198,6 +198,14 @@ if (BUILD_COMPAT_2_0) {
   };
 
   /**
+   * Generates a deviceId.
+   * @public
+   */
+  Amplitude.prototype.generateDeviceId = function generateDeviceId() {
+    return this.getInstance().generateDeviceId();
+  };
+
+  /**
     * Sets a custom deviceId for current user. Note: this is not recommended unless you know what you are doing
     * (like if you have your own system for managing deviceIds). Make sure the deviceId you set is sufficiently unique
     * (we recommend something like a UUID - see src/uuid.js for an example of how to generate) to prevent conflicts with other devices in our system.
