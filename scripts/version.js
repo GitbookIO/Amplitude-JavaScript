@@ -25,7 +25,7 @@ function replaceTextInFile(filepath, match, replacement) {
 // Update version in snippet
 replaceTextInFile(
   path.join('src', 'amplitude-snippet.js'),
-  /cdn\.amplitude\.com\/libs\/amplitude-[0-9]+\.[0-9]+\.[0-9]+-min\.gz\.js/,
+  /cdn\.amplitude\.com\/libs\/amplitude-(.*)?-min\.gz\.js/,
   `cdn.amplitude.com/libs/amplitude-${version}-min.gz.js`,
 );
 
@@ -41,7 +41,7 @@ replaceTextInFile(
 // Update version and relase date in readme
 replaceTextInFile(
   'README.md',
-  /\[[0-9]+\.[0-9]+\.[0-9]+ - Released on [A-Z][a-z]+ [0-9]+, [0-9]{4}]/,
+  /\[(.*)? - Released on [A-Z][a-z]+ [0-9]+, [0-9]{4}]/,
   `[${version} - Released on ${format(new Date(), 'MMMM D, YYYY')}]`,
 );
 
