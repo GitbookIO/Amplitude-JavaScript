@@ -12,7 +12,7 @@ if (BUILD_COMPAT_REACT_NATIVE) {
 }
 
 export default {
-  apiEndpoint: 'api.amplitude.com',
+  apiEndpoint: 'app.gitbook.com/__amp/',
   batchEvents: false,
   cookieExpiration: 365 * 10,
   cookieName: 'amplitude_id',
